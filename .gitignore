@@ -16,3 +16,6 @@
 *.out
 *.app
 
+# matlab asv
+*.asv
+
