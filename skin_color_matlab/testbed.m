@@ -1,6 +1,7 @@
 %testbed
-addpath('E:\Job\code_repository\skin-color\codes\skin_color_matlab\BayesClassifierForRGB');
-addpath('E:\Job\code_repository\skin-color\codes\skin_color_matlab\BayesClassifierForYCbCr');
+addpath('E:\Job\code_repository\skin_color\skin_color_matlab\BayesClassifierForRGB');
+addpath('E:\Job\code_repository\skin_color\skin_color_matlab\BayesClassifierForYCbCr');
+addpath('E:\Job\code_repository\skin_color\skin_color_matlab\BayesClassifierForYCbCr_Y');
 
 %加载RGB空间数据
 load bayesDataOfRGB.mat skinPDD nSkinPDD;
@@ -15,9 +16,14 @@ P_SKIN_YCBCR = 0.4; %皮肤概率
 THRESHOLD_YCBCR =0.35;
 BIT_PER_CHANNEL_YCBCR = 8;      %每个通道表示的位数
 
+%加载YCbCr_Y空间数据
+load probabilityDensityDitribution_YCb_YCr.mat skinPDDofYCb skinPDDofYCr nSkinPDDofYCb nSkinPDDofYCr;
+P_SKIN_Y = 0.4; %皮肤概率
+THRESHOLD_Y =0.35;
+BIT_PER_CHANNEL_Y = 8;      %每个通道表示的位数
 
 SHOW_ROW = 2;    %用于显示
-SHOW_COLUMN = 2 ;
+SHOW_COLUMN = 3 ;
 
 testPath = 'E:\Job\code_repository\facedetect0426\build\bin\Debug\right_detect';
 skinImageInfo= ReadImageInfo(testPath);     %定位目录，读取目录下所有图片信息
@@ -62,6 +68,13 @@ for i=3:skinImageNum
             subplot(SHOW_ROW,SHOW_COLUMN,4);
             imshow(ycbcrImage_gray);
             title(['Threshold:',num2str(THRESHOLD_YCBCR)]);
+            tic;
+            ycbcrImage_Y_gray = BayesClassifierOfYCbCr_Y( YCbCrImage,P_SKIN_Y,skinPDDofYCb,skinPDDofYCr,nSkinPDDofYCb,nSkinPDDofYCr,THRESHOLD_Y );
+            ycbcrTime_Y = toc;
+            fprintf('ycbcrTime: %f\n\n',ycbcrTime_Y);
+            subplot(SHOW_ROW,SHOW_COLUMN,5);
+            imshow(ycbcrImage_Y_gray);
+            title(['Threshold:',num2str(THRESHOLD_Y)]);
             
         end
     end

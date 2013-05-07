@@ -10,9 +10,9 @@ BIT_PER_CHANNEL = 8;      %每个通道表示的位数
 totalSkinHistogram = zeros(MAX_CBCR,MAX_CBCR); %所有皮肤图片的直方图
 totalNSkinHistogram = zeros(MAX_CBCR,MAX_CBCR); %所有非皮肤图片直方图
 %读取图片
-skinPath='E:\projects\skin-color\skin-detection-db\skin-detection\skin-images\skin-images';
-skinImageInfo= ReadImageInfo(skinPath);     %定位目录，读取目录下所有图片信息
-maskPath='E:\projects\skin-color\skin-detection-db\skin-detection\skin-images\masks';
+skinPath='E:\Job\projects\skin-color\skin-detection-db\skin-detection\skin-images\skin-images';
+skinImageInfo = ReadImageInfo(skinPath);     %定位目录，读取目录下所有图片信息
+maskPath='E:\Job\projects\skin-color\skin-detection-db\skin-detection\skin-images\masks';
 maskImageInfo = ReadImageInfo(maskPath);
 
 skinImageNum = length(skinImageInfo);       %皮肤图像数目
